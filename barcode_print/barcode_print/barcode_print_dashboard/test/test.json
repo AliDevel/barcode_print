@@ -1,0 +1,20 @@
+{
+ "cards": [],
+ "charts": [
+  {
+   "width": "Half"
+  }
+ ],
+ "creation": "2023-01-14 17:29:24.113833",
+ "dashboard_name": "Test",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2023-01-14 17:30:15.067049",
+ "modified_by": "Administrator",
+ "module": "Barcode print",
+ "name": "Test",
+ "owner": "Administrator"
+}
