@@ -184,8 +184,10 @@ frappe.ui.form.on("Stock Reconciliation Z", {
 	set_amount_quantity: function(doc, cdt, cdn) {
 		var d = frappe.model.get_doc(cdt, cdn);
 		if (d.qty & d.valuation_rate) {
+			
+			frappe.model.set_value(cdt, cdn, "qty", flt(d.current_qty) - flt(d.quantity_difference_z));
 			frappe.model.set_value(cdt, cdn, "amount", flt(d.qty) * flt(d.valuation_rate));
-			frappe.model.set_value(cdt, cdn, "quantity_difference", flt(d.qty) - flt(d.current_qty));
+			//frappe.model.set_value(cdt, cdn, "quantity_difference", flt(d.qty) - flt(d.current_qty));
 			frappe.model.set_value(cdt, cdn, "amount_difference", flt(d.amount) - flt(d.current_amount));
 		}
 	},
@@ -241,9 +243,10 @@ frappe.ui.form.on("Stock Reconciliation Item", {
 		frm.events.set_valuation_rate_and_qty(frm, cdt, cdn);
 	},
 
-	qty: function(frm, cdt, cdn) {
+	quantity_difference_z: function(frm, cdt, cdn) {
 		frm.events.set_amount_quantity(frm, cdt, cdn);
 	},
+	
 
 	valuation_rate: function(frm, cdt, cdn) {
 		frm.events.set_amount_quantity(frm, cdt, cdn);

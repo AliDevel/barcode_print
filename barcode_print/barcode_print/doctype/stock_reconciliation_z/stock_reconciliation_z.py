@@ -524,7 +524,7 @@ class StockReconciliationZ(StockController):
 			d.current_amount = flt(d.current_qty, d.precision("current_qty")) * flt(
 				d.current_valuation_rate, d.precision("current_valuation_rate")
 			)
-
+			d.qty = flt(d.current_qty) - d.quantity_difference_z
 			d.quantity_difference = flt(d.qty) - flt(d.current_qty)
 			d.amount_difference = flt(d.amount) - flt(d.current_amount)
 
