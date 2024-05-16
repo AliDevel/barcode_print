@@ -4,7 +4,7 @@
 frappe.provide("erpnext.stock");
 frappe.provide("erpnext.accounts.dimensions");
 
-frappe.ui.form.on("Stock Reconciliation Z", {
+frappe.ui.form.on("Stock Reconciliation", {
 	onload: function(frm) {
 		frm.add_fetch("item_code", "item_name", "item_name");
 
@@ -153,7 +153,7 @@ frappe.ui.form.on("Stock Reconciliation Z", {
 
 		if(d.item_code && d.warehouse) {
 			frappe.call({
-				method: "erpnext.stock.doctype.stock_reconciliation.stock_reconciliation.get_stock_balance_for",
+				method: "barcode_print.barcode_print.doctype.stock_reconciliation.stock_reconciliation.get_stock_balance_for",
 				args: {
 					item_code: d.item_code,
 					warehouse: d.warehouse,
@@ -183,7 +183,7 @@ frappe.ui.form.on("Stock Reconciliation Z", {
 
 	set_amount_quantity: function(doc, cdt, cdn) {
 		var d = frappe.model.get_doc(cdt, cdn);
-		if (d.qty & d.valuation_rate) {
+		if (d.qty  && d.valuation_rate) {
 			
 			frappe.model.set_value(cdt, cdn, "qty", flt(d.current_qty) - flt(d.quantity_difference_z));
 			frappe.model.set_value(cdt, cdn, "amount", flt(d.qty) * flt(d.valuation_rate));
@@ -204,7 +204,7 @@ frappe.ui.form.on("Stock Reconciliation Z", {
 	set_expense_account: function(frm) {
 		if (frm.doc.company && erpnext.is_perpetual_inventory_enabled(frm.doc.company)) {
 			return frm.call({
-				method: "erpnext.stock.doctype.stock_reconciliation.stock_reconciliation.get_difference_account",
+				method: "barcode_print.barcode_print.doctype.stock_reconciliation.stock_reconciliation.get_difference_account",
 				args: {
 					"purpose": frm.doc.purpose,
 					"company": frm.doc.company

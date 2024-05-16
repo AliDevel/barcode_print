@@ -23,9 +23,9 @@ class EmptyStockReconciliationItemsError(frappe.ValidationError):
 	pass
 
 
-class StockReconciliationZ(StockController):
+class StockReconciliation(StockController):
 	def __init__(self, *args, **kwargs):
-		super(StockReconciliationZ, self).__init__(*args, **kwargs)
+		super(StockReconciliation, self).__init__(*args, **kwargs)
 		self.head_row = ["Item Code", "Warehouse", "Quantity", "Valuation Rate"]
 
 	def validate(self):
@@ -481,7 +481,7 @@ class StockReconciliationZ(StockController):
 		if not self.cost_center:
 			msgprint(_("Please enter Cost Center"), raise_exception=1)
 
-		return super(StockReconciliationZ, self).get_gl_entries(
+		return super(StockReconciliation, self).get_gl_entries(
 			warehouse_account, self.expense_account, self.cost_center
 		)
 
