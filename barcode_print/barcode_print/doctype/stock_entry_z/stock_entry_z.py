@@ -23,7 +23,7 @@ from erpnext.stock.doctype.serial_no.serial_no import (
 	get_serial_nos,
 	update_serial_nos_after_submit,
 )
-from erpnext.stock.doctype.stock_reconciliation.stock_reconciliation import (
+from barcode_print.barcode_print.doctype.stock_reconciliation.stock_reconciliation import (
 	OpeningEntryAccountError,
 )
 from erpnext.stock.get_item_details import (
