@@ -1,16 +1,11 @@
-# Copyright (c) 2013, Frappe Technologies Pvt. Ltd. and contributors
-# For license information, please see license.txt
-
 import frappe
 from frappe import _, scrub
 from frappe.utils import flt
 
 from erpnext.accounts.utils import get_fiscal_year
 
-
 def execute(filters=None):
     return Analytics(filters).run()
-
 
 class Analytics(object):
     def __init__(self, filters=None):
@@ -110,10 +105,7 @@ class Analytics(object):
             self.get_rows(items_list)
 
     def get_sales_transactions_based_on_customers_or_suppliers(self, items_list):
-        if self.filters["value_quantity"] == "Value":
-            value_field = "chd.amount as value_field"
-        else:
-            value_field = "chd.qty as value_field"
+        value_field = "chd.stock_qty as value_field"
 
         if self.filters.tree_type == "Customer":
             entity = "sal.customer as entity"
@@ -182,10 +174,7 @@ class Analytics(object):
             }
 
     def get_sales_transactions_based_on_items(self):
-        if self.filters["value_quantity"] == "Value":
-            value_field = "base_net_amount"
-        else:
-            value_field = "stock_qty"
+        value_field = "stock_qty"
 
         self.entries = frappe.db.sql(
             """
