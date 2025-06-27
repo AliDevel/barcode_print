@@ -219,7 +219,9 @@ class PartyLedgerSummaryReport(object):
         WHERE  status = %s and docstatus = 1 group by customer_name
     """, ('Overdue'))	
 		result_total = {row[0]: row[1] for row in total_amount}
-		
+		Unpaid = None
+		partpaid = None
+		paid = None
 		# Step 2: For each customer, fetch their sales invoices
 		for customer in all_customers:
 			customer_group = customer.get('customer_group') 
